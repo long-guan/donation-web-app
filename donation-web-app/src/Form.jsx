@@ -7,6 +7,8 @@ function Form(props) {
     const [quantity, setQuantity] = useState("");
     const [amount, setAmount] = useState("");
     const [date, setDate] = useState("");
+    // used to index the data
+    const [index, setIndex] = useState(1);
 
     // this would normally be an api call to the backend to save the data
     function handleSubmit(e) {
@@ -15,16 +17,13 @@ function Form(props) {
         let data = {};
         data.name = name;
         data.date = date;
+        // add index to data. This is normally done by the database
+        data.index = index;
+        // increment index
+        setIndex(index + 1);
         // money donation
         if (type === "1") {
             data.amount = amount;
-            // add index to data. This is normally done by the database
-            if (props.moneyData.length > 0) {
-                // get the last data index and add 1
-                data.index = props.moneyData[props.moneyData.length - 1].index + 1;
-            } else {
-                data.index = 1;
-            }
             let copyMoneyData = Array.from(props.moneyData);
             copyMoneyData.push(data);
             props.setMoneyData(copyMoneyData);
@@ -32,12 +31,6 @@ function Form(props) {
         // food donation
         else if (type === "2") {
             data.quantity = quantity;
-            // add index to data. This is normally done by the database
-            if (props.foodData.length > 0) {
-                data.index = props.foodData[props.foodData.length - 1].index + 1;
-            } else {
-                data.index = 1;
-            }
             let copyfoodData = Array.from(props.foodData);
             copyfoodData.push(data);
             props.setFoodData(copyfoodData);
@@ -45,12 +38,6 @@ function Form(props) {
         // clothing donation
         else {
             data.quantity = quantity;
-            // add index to data. This is normally done by the database
-            if (props.foodData.length > 0) {
-                data.index = props.clothingData[props.clothingData.length - 1].index + 1;
-            } else {
-                data.index = 1;
-            }
             let copyClothingData = Array.from(props.clothingData);
             copyClothingData.push(data);
             props.setClothingData(copyClothingData);

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Form from './Form';
 import DonationList from './DonationList';
+import Filter from './Filter';
 
 // app is built with React and Bootstrap to quickly get this app built
 // I normally use a linter so the code is more organized
@@ -30,6 +31,11 @@ function App() {
         setMoneyData={setMoneyData}
         setFoodData={setFoodData}
         setClothingData={setClothingData}
+      />
+      <Filter
+         moneyData={moneyData}
+         foodData={foodData}
+         clothingData={clothingData}
       />
     </div>
   )
